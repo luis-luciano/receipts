@@ -1,0 +1,345 @@
+* {margin: 0; padding: 0;}    
+html, body { 
+	width:17cm ; 
+	height: 26.5cm;
+	background-image: url('../img/receipt/receipt.png');
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+p{
+	text-align: center;
+	font-family: myFirstFont;
+    src: url(sansation_light.woff);
+}
+
+.contrato{
+	position: absolute;
+	left: 14.816cm;
+	top: .76cm;
+	font-size: 13px
+	font-weight: bold;
+}
+
+.recibo1{
+	position: absolute;
+	margin-left: 14.816cm;
+	margin-top: 1.62cm;
+	font-size: 13px
+	font-weight: bold;
+}
+
+.vencim{
+	position: absolute;
+	margin-left: 13.5cm;
+	margin-top: 2.9cm;
+	font-size: 13px
+}
+
+.mesF{
+	position: absolute;
+	margin-left: 13.1cm;
+	margin-top: 3.660cm;
+	font-size: 13px
+}
+
+.medidor{
+	position: absolute;
+	margin-left: 13.41cm;
+	margin-top: 4.370cm;
+	font-size: 13px
+}
+
+/*sector ruta y folio*/
+
+.sec{
+	position: absolute;
+	margin-left: 12.71cm;
+	margin-top: 5.19cm;
+	font-size: 13px
+}
+.rut{
+	position: absolute;
+	margin-left: 13.78cm;
+	margin-top: 5.19cm;
+	font-size: 13px
+}
+.folio{
+	position: absolute;
+	margin-left: 14.62cm;
+	margin-top: 5.19cm;
+	font-size: 13px
+}
+
+/*usuario datos*/
+.nombre{
+	position: absolute;
+	margin-left: .40cm;
+	margin-top: 3.12cm;
+	font-size: 9.5px
+}
+
+.rfc{
+	position: absolute;
+	margin-left: 1.40cm;
+	margin-top: 3.72cm;
+	font-size: 10px
+}
+
+.tarifa{
+	position: absolute;
+	margin-left: 6.50cm;
+	margin-top: 3.77cm;
+	font-size: 10px
+}
+.direcc{
+	position: absolute;
+	margin-left: .40cm;
+	margin-top: 4.47cm;
+	font-size: 9.5px
+}
+.direccF{
+	position: absolute;
+	margin-left: .40cm;
+	margin-top: 5.47cm;
+	font-size: 9px
+}
+.ccatastral{
+	position: absolute;
+	margin-left: .40cm;
+	margin-top: 6.15cm;
+	font-size: 12px
+}
+
+/*lecturas */
+
+.ant{
+	position: absolute;
+	margin-left: 8.92cm;
+	margin-top: 6.09cm;
+	font-size: 13px
+}
+.act{
+	position: absolute;
+	margin-left: 9.94cm;
+	margin-top: 6.09cm;
+	font-size: 13px
+}
+.consm{
+	position: absolute;
+	margin-left: 11.06cm;
+	margin-top: 6.09cm;
+	font-size: 13px
+}
+.prom{
+	position: absolute;
+	margin-left: 12.46cm;
+	margin-top: 6.09cm;
+	font-size: 13px
+}
+.mrezago{
+	position: absolute;
+	margin-left: 14.19cm;
+	margin-top: 6.09cm;
+	font-size: 13px
+}
+
+/*table mes fact*/
+
+table.t1{
+	position: absolute;
+	margin-left: 8.78cm;
+	margin-top: 7.68cm;
+	font-size: 8px;
+	
+}
+.t1 tr td {
+	width:100px;
+	text-align: center;
+}
+.fact{
+	position: absolute;
+	margin-left: 11.98cm;
+	margin-top: 10.85cm;
+	font-size: 8px;
+	font-weight: bold;
+}
+.total1{
+	position: absolute;
+	margin-left: 12.98cm;
+	margin-top: 11.35cm;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/*tabla pago anticipado */
+
+table.t2{
+	position: absolute;
+	margin-left: 8.78cm;
+	margin-top: 16.95cm;
+	font-size: 9.5px;
+	
+}
+.t2 tr td {
+	width:80px;
+	text-align: center;
+}
+.total2{
+	position: absolute;
+	margin-left: 13.98cm;
+	margin-top: 20.70cm;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.recibo2{
+	position: absolute;
+	margin-left: 1.60cm;
+	margin-top: 20.80cm;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/*tira para usuario*/
+table.t3{
+	position: absolute;
+	margin-left: 1.08cm;
+	margin-top: 23.19cm;
+	font-size: 6px;
+}
+.t3 tr td {
+	width:80px;
+	text-align: center;
+}
+.totalFA{
+	position: absolute;
+	margin-left: 5.38cm;
+	margin-top: 25.69cm;
+	font-size: 15px;
+	font-weight: bold;
+}
+table.t4{
+	position: absolute;
+	margin-left: 10.08cm;
+	margin-top: 23.22cm;
+	font-size: 9px;
+}
+.t4 tr td {
+	width:80px;
+	text-align: center;
+}
+.totalPA{
+	position: absolute;
+	margin-left: 13.79cm;
+	margin-top: 25.69cm;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.tContrato{
+	position: absolute;
+	margin-left: 4.48cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tRecibo{
+	position: absolute;
+	margin-left: 5.99cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tSec{
+	position: absolute;
+	margin-left: 7.41cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tRut{
+	position: absolute;
+	margin-left: 4.48cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+
+.tFol{
+	position: absolute;
+	margin-left: 5.38cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+.tVen{
+	position: absolute;
+	margin-left: 6.48cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+
+.tContrato2{
+	position: absolute;
+	margin-left: 12.89cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tRecibo2{
+	position: absolute;
+	margin-left: 14.45cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tSec2{
+	position: absolute;
+	margin-left: 15.81cm;
+	margin-top: 21.69cm;
+	font-size: 9px;
+}
+.tRut2{
+	position: absolute;
+	margin-left: 12.89cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+
+.tFol2{
+	position: absolute;
+	margin-left: 13.78cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+.tVen2{
+	position: absolute;
+	margin-left: 14.90cm;
+	margin-top: 22.33cm;
+	font-size: 9px;
+}
+
+div.barcode{
+	position: absolute;
+	margin-left: .5cm;
+	margin-top: 21.72cm;
+	font-size: 9px;
+}
+
+img.barcode{
+	width: 100px;
+	height: 35px;
+}
+
+div.barcode2{
+	position: absolute;
+	margin-left: 9.0cm;
+	margin-top: 21.72cm;
+	font-size: 9px;
+}
+/*logo mes*/
+div.logo_mes{
+	position: absolute;
+	margin-left: 3.0cm;
+	margin-top: 7.72cm;
+	font-size: 9px;
+}
+
+img.logo_m{
+	width: 130px;
+	height: 100px;
+}
