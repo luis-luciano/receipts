@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Concept;
 use App\Contract;
-use App\Measuring;
-use App\Receipt;
+use App\Detail;
+use App\Lecture;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller {
@@ -14,86 +13,89 @@ class ReceiptController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+/*
+$contracts = Contract::where('status', 'A')
+->where('total', '>', 0)
+->select(['contrato',
+'nombre',
+'colonia',
+'direccion',
+'tarifa',
+'sector',
+'ruta',
+'folio',
+'medidor',
+'servicio',
+'pagos_ven',
+'total',
+'rfc_u',
+'cve_dren',
+'año',
+'periodo',
+'cons_promedio',
+'direccion_fiscal',
+'colonia_fiscal',
+'cve_ubica'])
+->limit(1)
+->orderBy('sector', 'asc')
+->orderBy('ruta', 'asc')
+->orderBy('folio', 'asc')
+->orderBy('contrato', 'asc')
+->get()->toArray();
+$list_contracts = array();
 
-		$contracts = Contract::where('status', 'A')
-			->where('total', '>', 0)
-			->select(['contrato',
-				'nombre',
-				'colonia',
-				'direccion',
-				'tarifa',
-				'sector',
-				'ruta',
-				'folio',
-				'medidor',
-				'servicio',
-				'pagos_ven',
-				'total',
-				'rfc_u',
-				'cve_dren',
-				'año',
-				'periodo',
-				'cons_promedio',
-				'direccion_fiscal',
-				'colonia_fiscal',
-				'cve_ubica'])
-			->limit(1)
-			->orderBy('sector', 'asc')
-			->orderBy('ruta', 'asc')
-			->orderBy('folio', 'asc')
-			->orderBy('contrato', 'asc')
-			->get()->toArray();
-		$list_contracts = array();
+dd($contracts[0]);
 
-		dd($contracts[0]);
+foreach ($contracts as $contract) {
 
-		foreach ($contracts as $contract) {
+$receipt = Receipt::where('año', "2016")
+->where('periodo', "11")
+->where('contrato', $contract['contrato'])
+->select(['recibo', 'tot_apagar', 'f_vencimiento', 'm3_facturados'])
+->get()->toArray();
 
-			$receipt = Receipt::where('año', "2016")
-				->where('periodo', "11")
-				->where('contrato', $contract['contrato'])
-				->select(['recibo', 'tot_apagar', 'f_vencimiento', 'm3_facturados'])
-				->get()->toArray();
+//dd($receipt);
+$concepts = Concept::where('año', "2016")
+->where('periodo', "11")
+->where('contrato', $contract['contrato'])
+->select(['concepto', 'importe_a', 'importe_v'])
+->get()->toArray();
 
-			//dd($receipt);
-			$concepts = Concept::where('año', "2016")
-				->where('periodo', "11")
-				->where('contrato', $contract['contrato'])
-				->select(['concepto', 'importe_a', 'importe_v'])
-				->get()->toArray();
+$contract['conceptos'] = $concepts;
 
-			$contract['conceptos'] = $concepts;
+$measuring = Measuring::where('año', "2016")
+->where('periodo', "11")
+->where('contrato', $contract['contrato'])
+->select(['lec_anterior', 'lec_actual', 'consumo'])
+->get()->toArray();
 
-			$measuring = Measuring::where('año', "2016")
-				->where('periodo', "11")
-				->where('contrato', $contract['contrato'])
-				->select(['lec_anterior', 'lec_actual', 'consumo'])
-				->get()->toArray();
+if (isset($measuring[0])) {
+$contract = array_merge($contract, $measuring[0]);
+}
 
-			if (isset($measuring[0])) {
-				$contract = array_merge($contract, $measuring[0]);
-			}
+$contract = array_merge($contract, $receipt[0]);
 
-			$contract = array_merge($contract, $receipt[0]);
+$barcodeRN = '23' . substr($contract['contrato'], -5) . $contract['recibo'] . Carbon::createFromFormat('d/m/Y', (string) trim($contract['f_vencimiento']))->format('Ymd') . str_pad((int) $contract['tot_apagar'], 10, "0", STR_PAD_LEFT) . '001';
 
-			$barcodeRN = '23' . substr($contract['contrato'], -5) . $contract['recibo'] . Carbon::createFromFormat('d/m/Y', (string) trim($contract['f_vencimiento']))->format('Ymd') . str_pad((int) $contract['tot_apagar'], 10, "0", STR_PAD_LEFT) . '001';
+$barcodePA = '23' . substr($contract['contrato'], -5) . $contract['recibo'] . Carbon::createFromFormat('d/m/Y', (string) trim($contract['f_vencimiento']))->format('Ymd') . str_pad((int) $contract['tot_apagar'], 10, "0", STR_PAD_LEFT) . '012';
 
-			$barcodePA = '23' . substr($contract['contrato'], -5) . $contract['recibo'] . Carbon::createFromFormat('d/m/Y', (string) trim($contract['f_vencimiento']))->format('Ymd') . str_pad((int) $contract['tot_apagar'], 10, "0", STR_PAD_LEFT) . '012';
+$contract['barcode-rn'] = $barcodeRN;
 
-			$contract['barcode-rn'] = $barcodeRN;
+$contract['barcode-pa'] = $barcodePA;
 
-			$contract['barcode-pa'] = $barcodePA;
+// dd( $contract);
 
-			// dd( $contract);
+array_push($list_contracts, $contract);
 
-			array_push($list_contracts, $contract);
+//dd( $contract);
 
-			//dd( $contract);
+}*/
+		$contracts = Contract::searchContract(1208);
 
-		}
-
-		return view('admin.receipts.receipt', compact('list_contracts'));
-		//return view('admin.contracts.receipt', compact('list_contracts'));
+		$currentLecture = Lecture::latest(1208, 2016, 11)->first();
+		$details = Detail::latest(1208, 2016, 11)->get();
+		//dd($details);
+		return view('receipts.receipt', compact('contracts', 'currentLecture', 'details'));
 	}
 
 	/**

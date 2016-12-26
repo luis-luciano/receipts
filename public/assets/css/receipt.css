@@ -164,6 +164,14 @@ table.t1{
 	font-size: 8px;
 	font-weight: bold;
 }
+
+.total_description{
+	position: absolute;
+	margin-left: 8.80cm;
+	margin-top: 11.20cm;
+	font-size: 8px;
+	font-weight: bold;
+}
 .total1{
 	position: absolute;
 	margin-left: 12.98cm;
