@@ -90,12 +90,27 @@ array_push($list_contracts, $contract);
 //dd( $contract);
 
 }*/
-		$contracts = Contract::searchContract(1208);
+		/*
+			$contracts = Contract::searchContract(1208);
+			$currentLecture = Lecture::latest(1208, 2016, 11)->first();
+			$details = Detail::latest(1208, 2016, 11)->get();
+		*/
 
-		$currentLecture = Lecture::latest(1208, 2016, 11)->first();
-		$details = Detail::latest(1208, 2016, 11)->get();
-		//dd($details);
-		return view('receipts.receipt', compact('contracts', 'currentLecture', 'details'));
+		$all = Contract::where('status', 'A')->where('total', '>', 0)->limit(1)->pluck('contrato')->toArray();
+
+		$contracts = Collect();
+
+		foreach ($all as $contract) {
+			$user = [
+				'contract' => Contract::searchContract($contract),
+				'lecture' => Lecture::latest($contract, 2016, 11)->first(),
+				'details' => Detail::latest($contract, 2016, 11)->get(),
+			];
+
+			$contracts->put($contract, $user);
+		}
+
+		return view('receipts.receipt', compact('contracts'));
 	}
 
 	/**

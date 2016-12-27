@@ -166,9 +166,8 @@ return [
 		/*
 			         * Package Service Providers...
 		*/
-
-		//
 		Jenssegers\Date\DateServiceProvider::class,
+		Milon\Barcode\BarcodeServiceProvider::class,
 		/*
 			         * Application Service Providers...
 		*/
@@ -226,6 +225,8 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View' => Illuminate\Support\Facades\View::class,
 		'Date' => Jenssegers\Date\Date::class,
+		'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+		'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 	],
 
 ];

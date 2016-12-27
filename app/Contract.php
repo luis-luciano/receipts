@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Formatters\NumberFormatter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Contract extends Model {
@@ -16,6 +17,10 @@ class Contract extends Model {
 
 	public static function searchContract($contract) {
 		return static::find(str_pad($contract, 9, '0', STR_PAD_LEFT));
+	}
+
+	public function details() {
+		return $this->hasMany('App\Detail', 'contrato');
 	}
 
 	public function rate() {
@@ -38,6 +43,10 @@ class Contract extends Model {
 		return trim($this->receipt->f_vencimiento);
 	}
 
+	public function getCutoffDateAttribute() {
+		return trim($this->receipt->fecha_cte);
+	}
+
 	public function getServiceAddressAttribute() {
 		return trim($this->direccion) . "<br>" . trim($this->colonia);
 	}
@@ -52,6 +61,12 @@ class Contract extends Model {
 
 	public function getYearAttribute() {
 		return array_values($this->attributes)[41];
+	}
+
+	public function getMonthlyPaymentReferenceAttribute() {
+		return '23' . substr(trim($this->contrato), -5) . $this->receipt_number .
+		Carbon::createFromFormat('d/m/Y', (string) $this->cutoff_date)->format('Ymd') .
+		str_pad((int) $this->total, 5, "0", STR_PAD_LEFT) . '001';
 	}
 
 	public function getInvoicedMonthAttribute() {

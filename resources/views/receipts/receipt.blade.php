@@ -8,116 +8,122 @@
     </head>
     <body>
 
-
+    @foreach($contracts as $contract)
       <div class="row">
           <header>
              <div class="contrato">
-                 <p>{{ (int)$contracts->contrato }}</p>
+                 <p>{{ (int)$contract["contract"]->contrato }}</p>
              </div>
 
              <div class="recibo1">
-                 <p>{{ $contracts->receipt_number }}</p>
+                 <p>{{ $contract["contract"]->receipt_number }}</p>
              </div>
 
              <div class="vencim">
-                 <p>{{ $contracts->due_date }}</p>
+                 <p>{{ $contract["contract"]->due_date }}</p>
              </div>
 
              <div class="mesF">
-                 <p>{{ $contracts->invoiced_month }}</p>
+                 <p>{{ $contract["contract"]->invoiced_month }}</p>
              </div>
 
              <div class="medidor">
-                 <p>{{ trim($contracts->medidor) }}</p>
+                 <p>{{ trim($contract["contract"]->medidor) }}</p>
              </div>
 
              <div class="sec">
-                 <p>{{ $contracts->sector }}</p>
+                 <p>{{ $contract["contract"]->sector }}</p>
              </div>
 
              <div class="rut">
-                 <p>{{ $contracts->ruta }}</p>
+                 <p>{{ $contract["contract"]->ruta }}</p>
              </div>
 
              <div class="folio">
-                 <p>{{ $contracts->folio }}</p>
+                 <p>{{ $contract["contract"]->folio }}</p>
              </div>
 
-             <div class="ant">
-                 <p>
-                    {{ $currentLecture->lec_anterior}}
-                 </p>
-             </div>
-             <div class="act">
-                 <p>
-                    {{ $currentLecture->lec_actual}}
-                 </p>
-             </div>
-             <div class="consm">
-                 <p>
-                    {{ $currentLecture->consumo}}
-                 </p>
-             </div>
+            @if(!is_null($contract["lecture"]))
+                <div class="ant">
+                    <p>
+                       {{ $contract["lecture"]->lec_anterior}}
+                    </p>
+                </div>
+                <div class="act">
+                    <p>
+                       {{ $contract["lecture"]->lec_actual}}
+                    </p>
+                </div>
+                <div class="consm">
+                    <p>
+                       {{ $contract["lecture"]->consumo}}
+                    </p>
+                </div>
+            @endif
+
              <div class="prom">
                  <p>
-                    {{ $contracts->cons_promedio }}
+                    {{ $contract["contract"]->cons_promedio }}
                  </p>
              </div>
              <div class="mrezago">
                  <p>
-                    {{ $contracts->pagos_ven }}
+                    {{ $contract["contract"]->pagos_ven }}
                  </p>
              </div>
 
              <div class="nombre">
                  <p>
-                    {{ trim($contracts->nombre) }}
+                    {{ trim($contract["contract"]->nombre) }}
                  </p>
              </div>
              <div class="rfc">
                  <p>
-                    {{ trim($contracts->rfc_u) }}
+                    {{ trim($contract["contract"]->rfc_u) }}
                  </p>
              </div>
              <div class="tarifa">
                  <p>
-                    {{ $contracts->rate_description }}
+                    {{ $contract["contract"]->rate_description }}
                 </p>
              </div>
              <div class="direcc">
                  <p>
-                    {!! $contracts->service_address !!}
+                    {!! $contract["contract"]->service_address !!}
                 </p>
              </div>
              <div class="direccF">
                 <p>
-                    {{ $contracts->fiscal_address }}
+                    {{ $contract["contract"]->fiscal_address }}
                 </p>
              </div>
              <div class="ccatastral">
                  <p>
-                    {{ $contracts->cve_ubica }}
+                    {{ $contract["contract"]->cve_ubica }}
                  </p>
              </div>
         </header>
 
         <section>
             <table class="t1">
-                @foreach ($details as $detail)
+            @if(!is_null($contract["details"]))
+               @foreach ($contract["details"] as $detail)
                       <tr>
-                        <td>{{  trim($detail->concept->descripcion) }} </td>
+                        <td>{{  trim($detail->concept_description) }} </td>
                         <td>{{  ((float)$detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
                         <td>{{  ((float)$detail->importe_v != 0) ? trim($detail->importe_v) : "" }} </td>
                       </tr>
                 @endforeach
+            @endif
             </table>
 
             <div class="fact">FACTURACIÓN 2016</div>
             <div class="total_description">
-                {{ $contracts->total_format }}
+                {{ $contract["contract"]->total_format }}
             </div>
             <div class="total1">
-                  {{ $contracts->total }}
+                  {{ $contract["contract"]->total }}
+            </div>
             <div class="logo_mes">
                 <img class="logo_m" src="{{ asset('assets/img/receipt/mes_recib.png') }}">
             </div>
@@ -145,16 +151,40 @@
           <table class="t4">
 
           </table>
-          <div class="totalPA">1
+          <div class="totalPA">
 
           </div>
 
-          <div class="tContrato"><p> </p></div>
-          <div class="tRecibo"><p> </p></div>
-          <div class="tSec"><p> </p></div>
-          <div class="tRut"><p> </p></div>
-          <div class="tFol"><p> </p></div>
-          <div class="tVen"><p> </p></div>
+          <div class="tContrato">
+              <p>
+                  {{ $contract["contract"]->contrato }}
+              </p>
+          </div>
+          <div class="tRecibo">
+              <p>
+                  {{ $contract["contract"]->ReceiptNumber }}
+              </p>
+          </div>
+          <div class="tSec">
+              <p>
+                  {{ $contract["contract"]->sector }}
+              </p>
+          </div>
+          <div class="tRut">
+              <p>
+                  {{ $contract["contract"]->ruta }}
+              </p>
+          </div>
+          <div class="tFol">
+              <p>
+                  {{ $contract["contract"]->folio }}
+              </p>
+          </div>
+          <div class="tVen">
+              <p>
+                  {{ $contract["contract"]->due_date }}
+              </p>
+          </div>
 
           <div class="tContrato2"><p> </p></div>
           <div class="tRecibo2"><p> </p></div>
@@ -164,16 +194,18 @@
           <div class="tVen2"><p> </p></div>
 
           <div class="barcode">
-
+              {!! DNS1D::getBarcodeHTML($contract["contract"]->monthly_payment_reference, "C128",0.7,30) !!}
           </div>
 
           <div class="barcode2">
 
           </div>
         </footer>
-      </div>
-      <div style="page-break-after: always;">
-      </div>
+    </div>
+
+    <div style="page-break-after: always;">
+    </div>
+  @endforeach
 
     </body>
 </html>
