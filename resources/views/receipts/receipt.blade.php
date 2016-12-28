@@ -68,7 +68,7 @@
              </div>
              <div class="mrezago">
                  <p>
-                    {{ $contract["contract"]->pagos_ven }}
+                    {{ $contract["contract"]->months_of_lag}}
                  </p>
              </div>
 
@@ -146,7 +146,7 @@
 
           </table>
           <div class="totalFA">
-
+              {{ $contract["contract"]->total }}
           </div>
           <table class="t4">
 

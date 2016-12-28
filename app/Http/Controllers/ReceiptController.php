@@ -7,6 +7,12 @@ use App\Lecture;
 use Illuminate\Http\Request;
 
 class ReceiptController extends Controller {
+
+	private $options, $optionsAgreement;
+
+	public function __construct() {
+
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -96,7 +102,7 @@ array_push($list_contracts, $contract);
 			$details = Detail::latest(1208, 2016, 11)->get();
 		*/
 
-		$all = Contract::where('status', 'A')->where('total', '>', 0)->limit(1)->pluck('contrato')->toArray();
+		$all = Contract::where('status', 'A')->where('total', '>', 0)->where('contrato', '000001208')->limit(1)->pluck('contrato')->toArray();
 
 		$contracts = Collect();
 
@@ -110,6 +116,8 @@ array_push($list_contracts, $contract);
 			$contracts->put($contract, $user);
 		}
 
+		//$pdf = PDF::loadView('receipts.receipt', compact('contracts'));
+		//return $pdf->stream('receipts.pdf');
 		return view('receipts.receipt', compact('contracts'));
 	}
 

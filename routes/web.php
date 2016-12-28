@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-use App\Contract;
 
 Route::get('/', function () {
 	return view('welcome');
@@ -18,6 +17,6 @@ Route::get('/', function () {
 
 Route::resource('receipts', 'ReceiptController');
 
-Route::get('test',function(){
-	dd(Contract::searchContract(1208)->atrib==utf8_decode('año'));
+Route::get('github', function () {
+	return \PDF::loadFile('http://www.github.com')->stream('github.pdf');
 });

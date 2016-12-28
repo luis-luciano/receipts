@@ -63,6 +63,19 @@ class Contract extends Model {
 		return array_values($this->attributes)[41];
 	}
 
+	public function getMonthsOfLagAttribute() {
+		return ($this->pagos_ven > 0) ? substr(strtoupper($this->months[$this->date_of_last_payment->month]), 0, 3) . "-" . $this->date_of_last_payment->year . " A " . substr(strtoupper($this->months[$this->last_period->month]), 0, 3) . "-" . $this->year : "";
+	}
+
+	public function getDateOfLastPaymentAttribute() {
+		$today = Carbon::create((int) $this->year, (int) $this->periodo);
+		return $today->subMonths($this->pagos_ven + 1);
+	}
+
+	public function getLastPeriodAttribute() {
+		return Carbon::create((int) $this->year, (int) $this->periodo)->subMonths(1);
+	}
+
 	public function getMonthlyPaymentReferenceAttribute() {
 		return '23' . substr(trim($this->contrato), -5) . $this->receipt_number .
 		Carbon::createFromFormat('d/m/Y', (string) $this->cutoff_date)->format('Ymd') .
@@ -71,7 +84,7 @@ class Contract extends Model {
 
 	public function getInvoicedMonthAttribute() {
 		try {
-			return strtoupper($this->months[$this->periodo - 1]) . "/" . substr((String) $this->year, 2);
+			return strtoupper($this->months[$this->last_period->month]) . "/" . substr((String) $this->year, 2);
 		} catch (Exception $e) {
 			return "";
 		}
