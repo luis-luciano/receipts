@@ -40,7 +40,7 @@ class Contract extends Model {
 	}
 
 	public function getDueDateAttribute() {
-		return trim($this->receipt->f_vencimiento);
+		return ($this->pagos_ven >= 2) ? "INMEDIATO" : trim($this->receipt->f_vencimiento);
 	}
 
 	public function getCutoffDateAttribute() {
@@ -68,18 +68,19 @@ class Contract extends Model {
 	}
 
 	public function getDateOfLastPaymentAttribute() {
-		$today = Carbon::create((int) $this->year, (int) $this->periodo);
+		$today = Carbon::create((int) $this->year, (int) $this->periodo, 1);
 		return $today->subMonths($this->pagos_ven + 1);
 	}
 
 	public function getLastPeriodAttribute() {
-		return Carbon::create((int) $this->year, (int) $this->periodo)->subMonths(1);
+		return Carbon::create((int) $this->year, (int) $this->periodo, 1)->subMonths(1);
 	}
 
 	public function getMonthlyPaymentReferenceAttribute() {
 		return '23' . substr(trim($this->contrato), -5) . $this->receipt_number .
 		Carbon::createFromFormat('d/m/Y', (string) $this->cutoff_date)->format('Ymd') .
 		str_pad((int) $this->total, 5, "0", STR_PAD_LEFT) . '001';
+
 	}
 
 	public function getInvoicedMonthAttribute() {

@@ -1,5 +1,5 @@
 * {margin: 0; padding: 0;}    
-html, body { 
+html, body {
 	width:17cm ; 
 	height: 26.5cm;
 	background-image: url('../img/receipt/receipt.png');
@@ -139,7 +139,7 @@ p{
 }
 .mrezago{
 	position: absolute;
-	margin-left: 14.19cm;
+	margin-left: 13.40cm;
 	margin-top: 6.09cm;
 	font-size: 13px
 }
@@ -151,8 +151,10 @@ table.t1{
 	margin-left: 8.78cm;
 	margin-top: 7.68cm;
 	font-size: 8px;
-	
+	text-align: left;
 }
+
+
 .t1 tr td {
 	width:100px;
 	text-align: center;
@@ -212,8 +214,8 @@ table.t2{
 /*tira para usuario*/
 table.t3{
 	position: absolute;
-	margin-left: 1.08cm;
-	margin-top: 23.19cm;
+	margin-left: 1.09cm;
+	margin-top: 23.24cm;
 	font-size: 6px;
 }
 .t3 tr td {
@@ -320,12 +322,10 @@ table.t4{
 	margin-top: 22.33cm;
 	font-size: 9px;
 }
-
-div.barcode{
+.barcode{
 	position: absolute;
-	margin-left: .5cm;
+	margin-left: 0.25cm;
 	margin-top: 21.72cm;
-	font-size: 9px;
 }
 
 img.barcode{
@@ -351,3 +351,4 @@ img.logo_m{
 	width: 130px;
 	height: 100px;
 }
+

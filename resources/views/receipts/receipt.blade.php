@@ -1,10 +1,9 @@
-<DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <meta charset="utf-8"/>
-        <title>Recibos</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link href="{{ asset('assets/css/receipt.css') }}" rel="stylesheet">
-        <link rel="shortcut icon" href="favicon"/>
+        <title>Recibos</title>
     </head>
     <body>
 
@@ -12,15 +11,15 @@
       <div class="row">
           <header>
              <div class="contrato">
-                 <p>{{ (int)$contract["contract"]->contrato }}</p>
+                 <p><strong>{{ (int)$contract["contract"]->contrato }}</strong></p>
              </div>
 
              <div class="recibo1">
-                 <p>{{ $contract["contract"]->receipt_number }}</p>
+                 <p><strong>{{ $contract["contract"]->receipt_number }}</strong></p>
              </div>
 
              <div class="vencim">
-                 <p>{{ $contract["contract"]->due_date }}</p>
+                 <p><strong>{{ $contract["contract"]->due_date }}</strong></p>
              </div>
 
              <div class="mesF">
@@ -109,7 +108,7 @@
             @if(!is_null($contract["details"]))
                @foreach ($contract["details"] as $detail)
                       <tr>
-                        <td>{{  trim($detail->concept_description) }} </td>
+                        <td style="text-align: left">{{  trim($detail->concept_description) }} </td>
                         <td>{{  ((float)$detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
                         <td>{{  ((float)$detail->importe_v != 0) ? trim($detail->importe_v) : "" }} </td>
                       </tr>
@@ -124,6 +123,7 @@
             <div class="total1">
                   {{ $contract["contract"]->total }}
             </div>
+
             <div class="logo_mes">
                 <img class="logo_m" src="{{ asset('assets/img/receipt/mes_recib.png') }}">
             </div>
@@ -143,7 +143,15 @@
         </aside>
         <footer>
           <table class="t3">
-
+             @if(!is_null($contract["details"]))
+               @foreach ($contract["details"] as $detail)
+                      <tr>
+                        <td style="text-align: left">{{  trim($detail->concept_description) }} </td>
+                        <td>{{  ((float)$detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
+                        <td>{{  ((float)$detail->importe_v != 0) ? trim($detail->importe_v) : "" }} </td>
+                      </tr>
+                @endforeach
+            @endif
           </table>
           <div class="totalFA">
               {{ $contract["contract"]->total }}
@@ -194,16 +202,13 @@
           <div class="tVen2"><p> </p></div>
 
           <div class="barcode">
-              {!! DNS1D::getBarcodeHTML($contract["contract"]->monthly_payment_reference, "C128",0.7,30) !!}
+              {!! DNS1D::getBarcodeSVG($contract["contract"]->monthly_payment_reference, "C128",0.75,30) !!}
           </div>
 
           <div class="barcode2">
 
           </div>
         </footer>
-    </div>
-
-    <div style="page-break-after: always;">
     </div>
   @endforeach
 

@@ -11,7 +11,12 @@ class ReceiptController extends Controller {
 	private $options, $optionsAgreement;
 
 	public function __construct() {
-
+		/*$this->options = array(
+			'page-size' => 'executive',
+			'margin-top' => 0,
+			'margin-left' => 0,
+			'user-style-sheet' => public_path() . '\assets\css\receipt.css',
+		);*/
 	}
 	/**
 	 * Display a listing of the resource.
@@ -101,22 +106,28 @@ array_push($list_contracts, $contract);
 			$currentLecture = Lecture::latest(1208, 2016, 11)->first();
 			$details = Detail::latest(1208, 2016, 11)->get();
 		*/
+		ini_set('max_execution_time', 300);
+		$general = Contract::searchContract(0);
 
-		$all = Contract::where('status', 'A')->where('total', '>', 0)->where('contrato', '000001208')->limit(1)->pluck('contrato')->toArray();
+		$year = $general->year;
+		$period = $general->periodo;
+
+		$all = Contract::where('status', 'A')->where('total', '>', 0)->where('contrato', '000000282')->limit(1)->pluck('contrato')->toArray();
 
 		$contracts = Collect();
 
 		foreach ($all as $contract) {
 			$user = [
 				'contract' => Contract::searchContract($contract),
-				'lecture' => Lecture::latest($contract, 2016, 11)->first(),
-				'details' => Detail::latest($contract, 2016, 11)->get(),
+				'lecture' => Lecture::latest($contract, $year, $period)->first(),
+				'details' => Detail::latest($contract, $year, $period)->get(),
 			];
 
 			$contracts->put($contract, $user);
 		}
 
 		//$pdf = PDF::loadView('receipts.receipt', compact('contracts'));
+		//$pdf->setOptions($this->options);
 		//return $pdf->stream('receipts.pdf');
 		return view('receipts.receipt', compact('contracts'));
 	}
