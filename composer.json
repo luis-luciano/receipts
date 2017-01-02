@@ -28,7 +28,7 @@
             "CaptureLineGenerator\\": "packages/slc/capturelinegenerator/src/"
         },
          "files":[
-           
+            "app/helpers.php",
             "packages/slc/capturelinegenerator/src/helpers.php"
         ]
     },

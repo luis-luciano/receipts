@@ -19,4 +19,8 @@ class Concept extends Model {
 		return $this->hasMany('App\Detail', 'concepto');
 	}
 
+	public function normalDetails() {
+		return $this->hasMany('App\NormalDetail', 'concepto');
+	}
+
 }

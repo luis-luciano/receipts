@@ -119,7 +119,7 @@ array_push($list_contracts, $contract);
 		$normalDetails = cache('normalDetails');
 		$details = cache('details');
 
-		$contracts = $contracts->where('contrato', '000001208')->take(10);
+		// $contracts = $contracts->take(10);
 
 		return view('receipts.receipt', compact(
 			'contracts',
