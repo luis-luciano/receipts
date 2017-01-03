@@ -105,7 +105,7 @@ array_push($list_contracts, $contract);
 			$currentLecture = Lecture::latest(1208, 2016, 11)->first();
 			$details = Detail::latest(1208, 2016, 11)->get();
 		*/
-		ini_set('max_execution_time', 3600);
+		ini_set('max_execution_time', 4000);
 		ini_set('memory_limit', '38G');
 
 		if ($wantTheLatest = false || is_null(cache('contracts'))) {
@@ -119,7 +119,8 @@ array_push($list_contracts, $contract);
 		$normalDetails = cache('normalDetails');
 		$details = cache('details');
 
-		$contracts = $contracts->where('contrato', '000001208')->take(10);
+		$contracts = $contracts->take(10);
+		//dd($details);
 
 		return view('receipts.receipt', compact(
 			'contracts',
@@ -134,10 +135,10 @@ array_push($list_contracts, $contract);
 	private function cacheReceipts() {
 		$year = 2016;
 		$period = 12;
-		$sector = '001';
-		$route = '02';
+		$sector = '020';
+		$route = '01';
 
-		$contracts = Contract::where('status', 'A')->where('total', '>', 0)->where('sector', $sector)->where('ruta', $route)->get();
+		$contracts = Contract::where('status', 'A')->where('total', '>', 0)->where('sector', $sector)->where('ruta', $route)->orderBy('folio', 'asc')->get();
 		$normalHeaders = DB::select(DB::raw("
 			select *
 			from tabla110

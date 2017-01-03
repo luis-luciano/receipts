@@ -97,4 +97,5 @@ class Contract extends Model {
 		$currency = ($total == 1) ? 'PESO' : 'PESOS';
 		return "(" . strtoupper($numbersFormatter->toWords($total)) . " " . $currency . " 00/100 M.N)";
 	}
+
 }

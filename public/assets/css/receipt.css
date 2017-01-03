@@ -26,6 +26,8 @@ html, body {
 .content {
 			text-align: center;
 			display: inline-block;
+			margin-top: -190px;
+			font-weight: bold;		
 		}
 
 
@@ -47,7 +49,7 @@ p{
 .contrato{
 	position: absolute;
 	margin-left: 559.9px;
-	margin-top: 28.7px;
+	margin-top: 21.7px;
 	font-size: 13px
 	font-weight: bold;
 }
@@ -55,7 +57,7 @@ p{
 .recibo1{
 	position: absolute;
 	margin-left: 559.9px;
-	margin-top: 61.22px;
+	margin-top: 55.22px;
 	font-size: 13px
 	font-weight: bold;
 }
@@ -63,21 +65,21 @@ p{
 .vencim{
 	position: absolute;
 	margin-left: 510.23px;
-	margin-top: 109.23px;
+	margin-top: 104.23px;
 	font-size: 13px
 }
 
 .mesF{
 	position: absolute;
 	margin-left: 495.11px;
-	margin-top: 138.33px;
+	margin-top: 133.33px;
 	font-size: 13px
 }
 
 .medidor{
 	position: absolute;
 	margin-left: 509.83px;
-	margin-top: 165.16px;
+	margin-top: 160.16px;
 	font-size: 13px
 }
 
@@ -86,19 +88,19 @@ p{
 .sec{
 	position: absolute;
 	margin-left: 480.37px;
-	margin-top: 196.15px;
+	margin-top: 191.15px;
 	font-size: 13px
 }
 .rut{
 	position: absolute;
 	margin-left: 520.81px;
-	margin-top: 196.15px;
+	margin-top: 191.15px;
 	font-size: 13px
 }
 .folio{
 	position: absolute;
 	margin-left: 552.56px;
-	margin-top: 196.15px;
+	margin-top: 191.15px;
 	font-size: 13px
 }
 
@@ -106,39 +108,39 @@ p{
 .nombre{
 	position: absolute;
 	margin-left: 15.11px;
-	margin-top: 117.92px;
+	margin-top: 112.92px;
 	font-size: 9.5px
 }
 
 .rfc{
 	position: absolute;
 	margin-left: 52.91px;
-	margin-top: 140.59px;
+	margin-top: 138.59px;
 	font-size: 10px
 }
 
 .tarifa{
 	position: absolute;
 	margin-left: 245.66px;
-	margin-top: 142.48px;
+	margin-top: 139.48px;
 	font-size: 10px
 }
 .direcc{
 	position: absolute;
 	margin-left: 15.11px;
-	margin-top: 168.94px;
+	margin-top: 162.94px;
 	font-size: 9.5px
 }
 .direccF{
 	position: absolute;
 	margin-left: 15.11px;
-	margin-top: 206.74px;
+	margin-top: 204.74px;
 	font-size: 9px
 }
 .ccatastral{
 	position: absolute;
 	margin-left: 15.11px;
-	margin-top: 232.44px;
+	margin-top: 227.44px;
 	font-size: 12px
 }
 
@@ -147,31 +149,31 @@ p{
 .ant{
 	position: absolute;
 	margin-left: 337.13px;
-	margin-top: 225.17px;
+	margin-top: 221.17px;
 	font-size: 13px
 }
 .act{
 	position: absolute;
 	margin-left: 375.68px;
-	margin-top: 225.17px;
+	margin-top: 221.17px;
 	font-size: 13px
 }
 .consm{
 	position: absolute;
 	margin-left: 418.01px;
-	margin-top: 225.17px;
+	margin-top: 221.17px;
 	font-size: 13px
 }
 .prom{
 	position: absolute;
 	margin-left: 470.92px;
-	margin-top: 225.17px;
+	margin-top: 221.17px;
 	font-size: 13px
 }
 .mrezago{
 	position: absolute;
 	margin-left: 506.45px;
-	margin-top: 225.17px;
+	margin-top: 221.17px;
 	font-size: 13px
 }
 
@@ -180,7 +182,7 @@ p{
 table.t1{
 	position: absolute;
 	margin-left: 331.84px;
-	margin-top: 290.26px;
+	margin-top: 287.26px;
 	font-size: 8px;
 	text-align: left;
 }
@@ -193,7 +195,7 @@ table.t1{
 .fact{
 	position: absolute;
 	margin-left: 452.78px;
-	margin-top: 410.07px;
+	margin-top: 405.07px;
 	font-size: 8px;
 	font-weight: bold;
 }
@@ -201,15 +203,15 @@ table.t1{
 .total_description{
 	position: absolute;
 	margin-left: 331.84px;
-	margin-top: 422.55px;
+	margin-top: 416.55px;
 	font-size: 8px;
 	font-weight: bold;
 }
 .total1{
 	position: absolute;
 	margin-left: 490.58px;
-	margin-top: 428.97px;
-	font-size: 14px;
+	margin-top: 422.97px;
+	font-size: 15px;
 	font-weight: bold;
 }
 
@@ -218,8 +220,8 @@ table.t1{
 table.t2{
 	position: absolute;
 	margin-left: 331.84px;
-	margin-top: 640.62px;
-	font-size: 9.5px;
+	margin-top: 636.62px;
+	font-size: 10.5px;
 	
 }
 .t2 tr td {
@@ -229,15 +231,23 @@ table.t2{
 .total2{
 	position: absolute;
 	margin-left: 528.37px;
-	margin-top: 782.36px;
-	font-size: 14px;
+	margin-top: 777.36px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.total_description2{
+	position: absolute;
+	margin-left: 331.84px;
+	margin-top: 767.80px;
+	font-size: 8px;
 	font-weight: bold;
 }
 
 .recibo2{
 	position: absolute;
 	margin-left: 60.47px;
-	margin-top: 786.14px;
+	margin-top: 783.14px;
 	font-size: 14px;
 	font-weight: bold;
 }
@@ -256,15 +266,15 @@ table.t3{
 .totalFA{
 	position: absolute;
 	margin-left: 203.33px;
-	margin-top: 962.96px;
-	font-size: 15px;
+	margin-top: 961.36px;
+	font-size: 16px;
 	font-weight: bold;
 }
 table.t4{
 	position: absolute;
 	margin-left: 380.97px;
 	margin-top: 877.60px;
-	font-size: 9px;
+	font-size: 10px;
 }
 .t4 tr td {
 	width:80px;
@@ -273,7 +283,7 @@ table.t4{
 .totalPA{
 	position: absolute;
 	margin-left: 521.19px;
-	margin-top: 970.96px;
+	margin-top: 961.36px;
 	font-size: 15px;
 	font-weight: bold;
 }
@@ -281,82 +291,83 @@ table.t4{
 .tContrato{
 	position: absolute;
 	margin-left: 169.32px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tRecibo{
 	position: absolute;
 	margin-left: 223.05px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tSec{
 	position: absolute;
 	margin-left: 280.06px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tRut{
 	position: absolute;
 	margin-left: 169.32px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 
 .tFol{
 	position: absolute;
 	margin-left: 203.33px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 .tVen{
 	position: absolute;
 	margin-left: 244.91px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 
 .tContrato2{
 	position: absolute;
 	margin-left: 487.18px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tRecibo2{
 	position: absolute;
 	margin-left: 546.14px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tSec2{
 	position: absolute;
 	margin-left: 597.54px;
-	margin-top: 819.77px;
+	margin-top: 815.77px;
 	font-size: 9px;
 }
 .tRut2{
 	position: absolute;
 	margin-left: 487.18px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 
 .tFol2{
 	position: absolute;
 	margin-left: 520.81px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 .tVen2{
 	position: absolute;
 	margin-left: 563.14px;
-	margin-top: 843.96px;
+	margin-top: 839.96px;
 	font-size: 9px;
 }
 .barcode{
 	position: absolute;
-	margin-left: 9.44px;
-	margin-top: 820.91px;
+	margin-left: 9.38px;
+	margin-top: 817.91px;
+	font-size: 9px;
 }
 
 img.barcode{
@@ -366,8 +377,8 @@ img.barcode{
 
 div.barcode2{
 	position: absolute;
-	margin-left: 340.15px;
-	margin-top: 820.91px;
+	margin-left: 322.15px;
+	margin-top: 817.91px;
 	font-size: 9px;
 }
 /*logo mes*/

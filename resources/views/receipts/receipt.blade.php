@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <link href="{{ asset('assets/css/receipt.css') }}" rel="stylesheet">
+        <!--link href="{{ asset('assets/css/receipt.css') }}" rel="stylesheet"-->
         <link rel="shortcut icon" href="favicon" media="print" />
         <title>Recibos</title>
         <style>
@@ -120,7 +120,7 @@
 
                 <section>
                     <table class="t1">
-                        @if(count($details = $details->where('contrato', $contract->contrato)) > 0)
+                        @if(count($details = $details->whereStrict('contrato', $contract->contrato)) > 0)
                             @foreach ($details as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ transConcept($detail->concepto, $detail->descripcion) }} </td>
@@ -130,6 +130,8 @@
                             @endforeach
                         @endif
                     </table>
+                    </br></br></br></br></br></br>
+
 
                     <div class="fact">FACTURACIÓN 2016</div>
                     <div class="total_description">
@@ -156,6 +158,11 @@
                             @endforeach
                         @endif
                     </table>
+                    <div class="total_description2">
+                        @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                            {{ descriptiveAmount($due->totalAPagar) }}
+                        @endif
+                    </div>
                     <div class="total2">
                         @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
                             {{ $due->totalAPagar }}
@@ -194,7 +201,9 @@
                         @endif
                     </table>
                     <div class="totalPA">
-
+                        @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                            {{ $due->totalAPagar }}
+                        @endif
                     </div>
 
                     <div class="tContrato">
@@ -272,12 +281,20 @@
                     </div>
 
                     <div class="barcode">
-                        {!! DNS1D::getBarcodeSVG($contract->monthly_payment_reference, "C128",0.75,30) !!}
+                        {!! DNS1D::getBarcodeSVG($contract->monthly_payment_reference, "C128",0.75,30) !!}</br>
+                        {{ $contract->monthly_payment_reference}}
                     </div>
-
+{{--
                     <div class="barcode2">
+                        @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()) && !is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                                @php
+                                    $reference=annualPaymentReference((int) $contract->contrato,$normalHeader->recibo,$contract->cutoff_date,(int)$due->totalAPagar)
+                                @endphp
+                                {!! DNS1D::getBarcodeSVG($reference, "C128",0.75,30) !!}</br>
+                                {{ $reference }}
+                        @endif
 
-                    </div>
+                    </div>--}}
                 </footer>
             </div>
             <div class="saltoDePagina"></div>
