@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <!--link href="{{ asset('assets/css/receipt.css') }}" rel="stylesheet"-->
+        <link href="{{ asset('assets/css/receipt.css') }}" rel="stylesheet">
         <link rel="shortcut icon" href="favicon" media="print" />
         <title>Recibos</title>
         <style>
@@ -21,6 +21,7 @@
     <body>
         @foreach($contracts as $contract)
             <div class="content">
+                <div class="dateOfIssue"><strong>FECHA DE EMISION: {{ $dateOfIssue }}</strong></div>
                 <header>
                     <div class="contrato">
                         <p><strong>{{ (int)$contract->contrato }}</strong>
@@ -120,8 +121,8 @@
 
                 <section>
                     <table class="t1">
-                        @if(count($details = $details->whereStrict('contrato', $contract->contrato)) > 0)
-                            @foreach ($details as $detail)
+                        @if(count($dls = $details->where('contrato', $contract->contrato)) > 0)
+                            @foreach ($dls as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ transConcept($detail->concepto, $detail->descripcion) }} </td>
                                     <td>{{ ((float) $detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
@@ -130,8 +131,6 @@
                             @endforeach
                         @endif
                     </table>
-                    </br></br></br></br></br></br>
-
 
                     <div class="fact">FACTURACIÓN 2016</div>
                     <div class="total_description">
@@ -148,8 +147,8 @@
 
                 <aside>
                     <table class="t2">
-                        @if(count($normalDetails = $normalDetails->where('contrato', $contract->contrato)) > 0)
-                            @foreach ($normalDetails as $detail)
+                        @if(count($normalDls = $normalDetails->where('contrato', $contract->contrato)) > 0)
+                            @foreach ($normalDls as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ $detail->concepto }} </td>
                                     <td>{{ ((float) $detail->cargo_mes != 0) ? trim($detail->cargo_mes) : "" }} </td>
@@ -176,8 +175,8 @@
                 </aside>
                 <footer>
                     <table class="t3">
-                        @if(!is_null($details = $details->where('contrato', $contract->contrato)))
-                            @foreach ($details as $detail)
+                        @if(!is_null($dls = $details->where('contrato', $contract->contrato)))
+                            @foreach ($dls as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ transConcept($detail->concepto, $detail->descripcion) }} </td>
                                     <td>{{ ((float) $detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
@@ -190,8 +189,8 @@
                         {{ $contract->total }}
                     </div>
                     <table class="t4">
-                        @if(count($normalDetails = $normalDetails->where('contrato', $contract->contrato)) > 0)
-                            @foreach ($normalDetails as $detail)
+                        @if(count($normalDls = $normalDetails->where('contrato', $contract->contrato)) > 0)
+                            @foreach ($normalDls as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ $detail->concepto }} </td>
                                     <td>{{ ((float) $detail->cargo_mes != 0) ? trim($detail->cargo_mes) : "" }} </td>
@@ -284,17 +283,17 @@
                         {!! DNS1D::getBarcodeSVG($contract->monthly_payment_reference, "C128",0.75,30) !!}</br>
                         {{ $contract->monthly_payment_reference}}
                     </div>
-{{--
+
                     <div class="barcode2">
                         @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()) && !is_null($due = $dues->where('contrato', $contract->contrato)->first()))
                                 @php
-                                    $reference=annualPaymentReference((int) $contract->contrato,$normalHeader->recibo,$contract->cutoff_date,(int)$due->totalAPagar)
+                                    $reference=annualPaymentReference((int) $contract->contrato,$normalHeader->recibo,$paydayLimit,(int)$due->totalAPagar)
                                 @endphp
                                 {!! DNS1D::getBarcodeSVG($reference, "C128",0.75,30) !!}</br>
                                 {{ $reference }}
                         @endif
 
-                    </div>--}}
+                    </div>
                 </footer>
             </div>
             <div class="saltoDePagina"></div>

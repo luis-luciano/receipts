@@ -46,6 +46,13 @@ p{
     src: url(sansation_light.woff);
 }
 
+.dateOfIssue{
+	position: absolute;
+	margin-left: 245.66px;
+	margin-top: 20px;
+	font-size: 8px;
+}
+
 .contrato{
 	position: absolute;
 	margin-left: 559.9px;
