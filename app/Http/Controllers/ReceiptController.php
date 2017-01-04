@@ -24,11 +24,12 @@ class ReceiptController extends Controller {
 		ini_set('max_execution_time', 5000);
 		ini_set('memory_limit', '38G');
 
+		$dateOfIssue = Carbon::now()->toDateString();
+		$paydayLimit = trim(Limit::find('MSG')->f_limite_pago);
+
 		if ($wantTheLatest = false || is_null(cache('contracts'))) {
 			$this->cacheReceipts();
 		}
-		$dateOfIssue = Carbon::now()->toDateString();
-		$paydayLimit = trim(Limit::find('MSG')->f_limite_pago);
 
 		$contracts = cache('contracts');
 		$lectures = cache('lectures');
@@ -54,8 +55,8 @@ class ReceiptController extends Controller {
 	private function cacheReceipts() {
 		$year = 2016;
 		$period = 12;
-		$sector = '010';
-		$route = '02';
+		$sector = '009';
+		$route = '04';
 
 		$contracts = Contract::where('status', 'A')->where('total', '>', 0)->where('sector', $sector)->where('ruta', $route)->orderBy('folio', 'asc')->get();
 		$normalHeaders = DB::select(DB::raw("

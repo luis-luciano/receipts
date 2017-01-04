@@ -274,7 +274,7 @@
                     <div class="tVen2">
                         <p>
                             @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
-                                {{ $contract->due_date }}
+                                {{ $paydayLimit }}
                             @endif
                         </p>
                     </div>
