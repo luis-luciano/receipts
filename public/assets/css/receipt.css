@@ -4,31 +4,30 @@
   size: 642.51px 1001.57px;  /* ancho altura */
 }
 
-
 html, body {
-			margin-top: 0%;
-			padding: 0;
-			width:642.51px;
-			height: 1001.57px;
-			display: table;
-			font-weight: 100;
-			background-image: url('../img/receipt/receipt.png');	
-			background-size: 100% 100%;
-		 	background-repeat: no-repeat;
-		}
+	margin-top: 0%;
+	padding: 0;
+	width:642.51px;
+	height: 1001.57px;
+	display: table;
+	font-weight: 100;
+	background-image: url('../img/receipt/receipt.png');	
+background-size: 100% 100%;
+ 	background-repeat: no-repeat; 
+}
 
 .container {
-			text-align: center;
-			display: table-cell;
-			vertical-align: middle;
-		}
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
 
 .content {
-			text-align: center;
-			display: inline-block;
-			margin-top: -190px;
-			font-weight: bold;		
-		}
+	text-align: center;
+	display: inline-block;
+	margin-top: -190px;
+	font-weight: bold;		
+}
 
 
 /*html, body {
@@ -214,6 +213,7 @@ table.t1{
 	font-size: 8px;
 	font-weight: bold;
 }
+
 .total1{
 	position: absolute;
 	margin-left: 490.58px;
@@ -406,3 +406,12 @@ img.logo_m{
 	height: 100px;
 }
 
+/* cuando vayamos a imprimir ... */
+
+@media print {
+    /* indicamos el salto de pagina */
+    .saltoDePagina {
+        display: block;
+        page-break-before: always;
+    }
+}

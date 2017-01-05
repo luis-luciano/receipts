@@ -5,7 +5,7 @@ use App\Contract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReceiptController extends Controller {
+class ReceiptController3 extends Controller {
 
 	private $options, $optionsAgreement;
 

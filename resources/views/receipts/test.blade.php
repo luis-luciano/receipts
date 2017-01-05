@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <style type="text/css">
+            
+        </style>
     </head>
     <body>
         @foreach($contracts as $contract)
@@ -43,7 +46,7 @@
                         <p>{{ $contract->folio }}</p>
                     </div>
 
-                    @if(!is_null($lecture = $lectures->where('contrato', $contract->contrato)->first()))
+                    @if(!is_null($lecture = $contract->lecture))
                         <div class="ant">
                             <p>
                                 {{ $lecture->lec_anterior }}
@@ -106,8 +109,8 @@
 
                 <section>
                     <table class="t1">
-                        @if(count($dls = $details->where('contrato', $contract->contrato)) > 0)
-                            @foreach ($dls as $detail)
+                        @if(!is_null($details = $contract->details))
+                            @foreach ($details as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ transConcept($detail->concepto, $detail->descripcion) }} </td>
                                     <td>{{ ((float) $detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
@@ -126,14 +129,14 @@
                     </div>
 
                     <div class="logo_mes">
-                        <img class="logo_m" src="{{ asset('/assets/img/receipt/mes_recib.png') }}">
+                    {{-- <img class="logo_m" src="{{ asset('/assets/img/receipt/mes_recib.png') }}">   --}}
+                       
                     </div>
                 </section>
-
                 <aside>
                     <table class="t2">
-                        @if(count($normalDls = $normalDetails->where('contrato', $contract->contrato)) > 0)
-                            @foreach ($normalDls as $detail)
+                        @if(!is_null($normalDetails = $contract->normalDetails))
+                            @foreach ($normalDetails as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ $detail->concepto }} </td>
                                     <td>{{ ((float) $detail->cargo_mes != 0) ? trim($detail->cargo_mes) : "" }} </td>
@@ -143,25 +146,25 @@
                         @endif
                     </table>
                     <div class="total_description2">
-                        @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                        @if(!is_null($due = $contract->due))
                             {{ descriptiveAmount($due->totalAPagar) }}
                         @endif
                     </div>
                     <div class="total2">
-                        @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                        @if(!is_null($due))
                             {{ $due->totalAPagar }}
                         @endif
                     </div>
                     <div class="recibo2">
-                        @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                        @if(!is_null($normalHeader = $contract->normalHeader))
                             {{ $normalHeader->recibo }}
                         @endif
                     </div>
                 </aside>
                 <footer>
                     <table class="t3">
-                        @if(!is_null($dls = $details->where('contrato', $contract->contrato)))
-                            @foreach ($dls as $detail)
+                        @if(!is_null($details = $contract->details))
+                            @foreach ($details as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ transConcept($detail->concepto, $detail->descripcion) }} </td>
                                     <td>{{ ((float) $detail->importe_a != 0) ? trim($detail->importe_a) : "" }} </td>
@@ -174,8 +177,8 @@
                         {{ $contract->total }}
                     </div>
                     <table class="t4">
-                        @if(count($normalDls = $normalDetails->where('contrato', $contract->contrato)) > 0)
-                            @foreach ($normalDls as $detail)
+                        @if(!is_null($normalDetails = $contract->normalDetails))
+                            @foreach ($normalDetails as $detail)
                                 <tr>
                                     <td style="text-align: left">{{ $detail->concepto }} </td>
                                     <td>{{ ((float) $detail->cargo_mes != 0) ? trim($detail->cargo_mes) : "" }} </td>
@@ -185,7 +188,7 @@
                         @endif
                     </table>
                     <div class="totalPA">
-                        @if(!is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                        @if(!is_null($due))
                             {{ $due->totalAPagar }}
                         @endif
                     </div>
@@ -223,61 +226,58 @@
 
                     <div class="tContrato2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader = $contract->normalHeaders))
                                 {{ $contract->contrato }}
                             @endif
                         </p>
                     </div>
                     <div class="tRecibo2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader))
                                 {{ $normalHeader->recibo }}
                             @endif
                         </p>
                     </div>
                     <div class="tSec2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader))
                                 {{ $contract->sector }}
                             @endif
                         </p>
                     </div>
                     <div class="tRut2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader))
                                 {{ $contract->ruta }}
                             @endif
                         </p>
                     </div>
                     <div class="tFol2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader))
                                 {{ $contract->folio }}
                             @endif
                         </p>
                     </div>
                     <div class="tVen2">
                         <p>
-                            @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()))
+                            @if(!is_null($normalHeader))
                                 {{ $paydayLimit }}
                             @endif
                         </p>
                     </div>
-
                     <div class="barcode">
                         {!! DNS1D::getBarcodeSVG($contract->monthly_payment_reference, "C128",0.75,30) !!}</br>
                         {{ $contract->monthly_payment_reference}}
                     </div>
-
                     <div class="barcode2">
-                        @if(!is_null($normalHeader = $normalHeaders->where('contrato', $contract->contrato)->first()) && !is_null($due = $dues->where('contrato', $contract->contrato)->first()))
+                        @if(!is_null($normalHeader) && !is_null($due))
                                 @php
-                                    $reference=annualPaymentReference((int) $contract->contrato,$normalHeader->recibo,$paydayLimit,(int)$due->totalAPagar)
+                                    $reference = annualPaymentReference((int) $contract->contrato,$normalHeader->recibo,$paydayLimit,(int)$due->totalAPagar)
                                 @endphp
                                 {!! DNS1D::getBarcodeSVG($reference, "C128",0.75,30) !!}</br>
                                 {{ $reference }}
                         @endif
-
                     </div>
                 </footer>
             </div>

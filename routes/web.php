@@ -15,7 +15,8 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Route::resource('receipts', 'ReceiptController');
+Route::get('receipts/{year}/{period}/{sector}/{route}', 'ReceiptController@receipts');
+//Route::resource('receipts', 'ReceiptController');
 
 Route::get('github', function () {
 	return \PDF::loadFile('http://www.github.com')->stream('github.pdf');
