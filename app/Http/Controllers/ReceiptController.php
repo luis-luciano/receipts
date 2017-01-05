@@ -36,8 +36,9 @@ class ReceiptController extends Controller {
         $dateOfIssue = Carbon::now()->toDateString();
         $paydayLimit = trim(Limit::find('MSG')->f_limite_pago);
 
-        if ($wantTheLatest = false || is_null(cache('contracts'))) {
+        if ($wantTheLatest = true || is_null(cache('contracts'))) {
             $this->cacheReceipts($year, $period, $sector, $route);
+            die;
         }
 
         $contracts = cache('contracts');
@@ -54,22 +55,16 @@ class ReceiptController extends Controller {
         $details = $details->groupBy('contrato');
 
         $contracts->transform(function($contract, $index) use ($lectures, $dues, $normalHeaders, $normalDetails, $details) {
-            $contract->lecture = ($lectures = $lectures->pull($contract->contrato) ? $lectures->first() : null);
-            $contract->due = ($dues = $dues->pull($contract->contrato) ? $dues->first()->first() : null);
-            $contract->normalHeader = ($normalHeaders = $normalHeaders->pull($contract->contrato)) ? $normalHeaders->first() : null;
-            $contract->normalDetails = ($normalDetails = $normalDetails->pull($contract->contrato)) ? : null;
-            $contract->details = ($details = $details->pull($contract->contrato)) ? : null;
+            $contract->lecture = (($contractLecture = $lectures->pull($contract->contrato)) ? $contractLecture->first() : null);
+            $contract->due = (($contractDue = $dues->pull($contract->contrato)) ? $contractDue->first() : null);
+            $contract->normalHeader = ($contractNormalHeaders = $normalHeaders->pull($contract->contrato)) ? $contractNormalHeaders->first() : null;
+            $contract->normalDetails = ($contractNormalDetails = $normalDetails->pull($contract->contrato)) ? : null;
+            $contract->details = ($contractDetails = $details->pull($contract->contrato)) ? : null;
 
             return $contract;
         });
 
-        $contracts = $contracts->take(1);
-
-        /*
-            $pdf = PDF::loadView('receipts.test');
-            $pdf->setOptions($this->options);
-            return $pdf->stream("prueba");
-        */
+        // $contracts = $contracts->take(10);
 
         $pdf = PDF::loadView('receipts.test', compact(
             'contracts',
